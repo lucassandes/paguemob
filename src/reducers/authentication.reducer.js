@@ -31,7 +31,8 @@ export function login(state = [], action) {
     console.log('Action recieved!!', action);
     switch (action.type) {
         case 'LOGIN_FETCH_DATA_SUCCESS':
-            return action.items;
+            console.log('Headers', action.items.config.headers);
+            return action.items.config.headers;
         default:
             return state;
     }
