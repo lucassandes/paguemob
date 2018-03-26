@@ -4,13 +4,16 @@ import {bindActionCreators} from 'redux';
 import {login} from '../actions/index';
 import {loginFetchData} from '../actions/index';
 
-class Login extends Component {
+class Registration extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: 'lucassandes92@gmail.com',
-            password: 'paguemob751'
+            name: '',
+            cpfOrCpnjRadio: '',
+            gender: '',
+            website: '',
+            telephone: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,31 +30,20 @@ class Login extends Component {
           [name]: value
         });
     }
-    doLogin() {
-        console.log("Do Login", this.state.username, this.state.password);
-    }
+  
 
     onFormSubmit(event) {
         event.preventDefault();
-        console.log("Do Login", this.state.username, this.state.password);
-        
-        this.props.loginFetchData(this.state.username, this.state.password);
+        console.log("Form submit!");        
     }
 
     
 
     render(){
-        const { username, password } = this.state;
+        const { name, cpfOrCpnjRadio, gender, website, telephone } = this.state;
         const onFormSubmit = this.onFormSubmit;
-        const doLogin = this.doLogin;
 
-        if (this.props.hasErrored) {
-            return <p>Sorry! Error login in </p>;
-            
-        }
-        if (this.props.isLoading) {
-            return <p>Loading…</p>;
-        }
+       
 
         return (
             <div>
@@ -74,28 +66,5 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        login: state.login,
-        isAuthenticated: state.loginIsAuthenticated,
-        hasErrored: state.loginHasErrored,
-        isLoading: state.loginIsLoading
-    };
-};
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        //bindActionCreators({login}, dispatch);
-        loginFetchData: (username, password) => dispatch(loginFetchData(username, password))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
-
-//test git
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({login}, dispatch);
-// }
-
-// export default connect(null, mapDispatchToProps)(Login);
 

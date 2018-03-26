@@ -27,6 +27,15 @@ export function loginIsLoading(state = false, action) {
             return state;
     }
 }
+
+export function loginIsAuthenticated(state = false, action) {
+    switch (action.type) {
+        case 'LOGIN_IS_AUTHENTICATED':
+            return action.isAuthenticated;
+        default:
+            return state;
+    }
+}
 export function login(state = [], action) {
     console.log('Action recieved!!', action);
     switch (action.type) {

@@ -6,22 +6,22 @@ const API_URL = 'https://paguemob-interview-environment.firebaseapp.com';
 
 export const LOGIN = 'LOGIN';
 
-export function login(username, password){
+// export function login(username, password){
 
-    const url = `${API_URL}/auth`;
+//     const url = `${API_URL}/auth`;
     
-    const request = axios.get(url, {
-        auth: {
-            username: username,
-            password: password
-        }
-      });
-    //console.log('Request:', request);
-    return {
-        type: LOGIN,
-        payload: request
-    };
-}
+//     const request = axios.get(url, {
+//         auth: {
+//             username: username,
+//             password: password
+//         }
+//       });
+//     //console.log('Request:', request);
+//     return {
+//         type: LOGIN,
+//         payload: request
+//     };
+// }
 
 export function loginHasErrored(bool) {
     return {
@@ -43,11 +43,18 @@ export function loginFetchDataSuccess(items) {
     };
 }
 
+export function loginIsAuthenticated(bool) {
+    return {
+        type: 'LOGIN_IS_AUTHENTICATED',
+        isAuthenticated: bool
+    }
+}
+
 export function loginFetchData(username, password) {
     const url = `${API_URL}/auth`;
     return (dispatch) => {
         dispatch(loginIsLoading(true));
-
+        dispatch(loginIsAuthenticated(false));
         const request = axios.get(url, {
             auth: {
                 username: username,
@@ -55,6 +62,7 @@ export function loginFetchData(username, password) {
             }
           }).then((response) => {
             dispatch(loginIsLoading(false));
+            dispatch(loginIsAuthenticated(true));
             dispatch(loginFetchDataSuccess(response));
             console.log(response);
           })
@@ -63,18 +71,5 @@ export function loginFetchData(username, password) {
             dispatch(loginHasErrored(true));
             console.log(error);
           });
-
-
-        // fetch(url)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw Error(response.statusText);
-        //         }
-        //         dispatch(itemsIsLoading(false));
-        //         return response;
-        //     })
-        //     .then((response) => response.json())
-        //     .then((items) => dispatch(itemsFetchDataSuccess(items)))
-        //     .catch(() => dispatch(itemsHasErrored(true)));
     };
 }
