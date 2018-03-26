@@ -89,6 +89,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 
+//test git
 // function mapDispatchToProps(dispatch){
 //     return bindActionCreators({login}, dispatch);
 // }
