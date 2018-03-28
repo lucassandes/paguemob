@@ -10,14 +10,14 @@ class Registration extends Component {
 
         this.state = {
             name: '',
-            cpfOrCpnjRadio: '',
+            cpfOrCpnjSelect: '',
+            cpfOrCpnj: '',
             gender: '',
             website: '',
             telephone: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.doLogin = this.doLogin.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
     
@@ -26,7 +26,7 @@ class Registration extends Component {
         const value = target.value;
         const name = target.name;
     
-        this.setState({
+        this.setState({ 
           [name]: value
         });
     }
@@ -50,11 +50,26 @@ class Registration extends Component {
                 <form onSubmit={onFormSubmit}>  
                     <div className="row">
                         <div className="six columns">
-                            <label htmlFor="emailInput"> Email </label>
-                            <input className="u-full-width" type="email" placeholder="test@mailbox.com" id="emailInput" name="username" value={username} onChange={this.handleChange} />
-
-                            <label htmlFor="passwordInput"> Passoword!</label>
-                            <input className="u-full-width" type="password" placeholder="Password" id="passwordInput" name="password" value={password} onChange={this.handleChange}/>
+                            <div className="row">
+                                <div class=""></div>
+                                <label htmlFor="nameInput"> Name </label>
+                                <input className="u-full-width" type="text" placeholder="Full Name" id="nameInput" name="name" value={name} onChange={this.handleChange} />
+                            </div> 
+                            <div className="row">
+                                <div className="six columns">
+                                    <label for="exampleRecipientInput">Contact type</label>
+                                    <select class="u-full-width" id="exampleRecipientInput">
+                                        <option value="Option 1">Person</option>
+                                        <option value="Option 2">Company</option>
+                                    </select>
+                                </div>
+                                <div className="six columns">
+                                    <label for="exampleRecipientInput">CPF</label>
+                                    <input  className="u-full-width" type="text" placeholder="CPF" 
+                                            id="nameInput" name="name" value={name} onChange={this.handleChange} />
+                                
+                                </div>
+                            </div>
 
                             <input className="button-primary" type="submit" value="Login" />
                             <div>{JSON.stringify(this.props.login)} == {JSON.stringify(this.props.isAuthenticated)}</div>
@@ -66,5 +81,4 @@ class Registration extends Component {
     }
 }
 
-
-
+export default Registration;
