@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {login} from '../actions/index';
+// import {bindActionCreators} from 'redux';
+// import {login} from '../actions/index';
 import {loginFetchData} from '../actions/index';
+
+import { Redirect } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props) {
@@ -14,7 +17,7 @@ class Login extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.doLogin = this.doLogin.bind(this);
+        // this.doLogin = this.doLogin.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
     
@@ -27,9 +30,9 @@ class Login extends Component {
           [name]: value
         });
     }
-    doLogin() {
-        console.log("Do Login", this.state.username, this.state.password);
-    }
+    // doLogin() {
+    //     console.log("Do Login", this.state.username, this.state.password);
+    // }
 
     onFormSubmit(event) {
         event.preventDefault();
@@ -43,8 +46,12 @@ class Login extends Component {
     render(){
         const { username, password } = this.state;
         const onFormSubmit = this.onFormSubmit;
-        const doLogin = this.doLogin;
-
+        
+        
+        if (this.props.isAuthenticated) {
+            return <Redirect to="registration" />;
+        }
+      
         if (this.props.hasErrored) {
             return <p>Sorry! Error login in </p>;
             
@@ -90,7 +97,9 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login)
 
 //test git
 // function mapDispatchToProps(dispatch){

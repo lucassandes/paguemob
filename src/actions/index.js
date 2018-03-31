@@ -55,7 +55,7 @@ export function loginFetchData(username, password) {
     return (dispatch) => {
         dispatch(loginIsLoading(true));
         dispatch(loginIsAuthenticated(false));
-        const request = axios.get(url, {
+        axios.get(url, {
             auth: {
                 username: username,
                 password: password
