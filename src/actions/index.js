@@ -73,3 +73,25 @@ export function loginFetchData(username, password) {
           });
     };
 }
+
+
+export function contactsFetchData(authorizaton) {
+    const url = `${API_URL}/contacts`;
+    return (dispatch) => {
+       
+       
+        axios.get(url, {
+            Authorization: authorizaton
+          }).then((response) => {
+            // dispatch(loginIsLoading(false));
+            // dispatch(loginIsAuthenticated(true));
+            // dispatch(loginFetchDataSuccess(response));
+            console.log(response);
+          })
+          .catch((error) => {
+            // dispatch(loginIsLoading(false));
+            // dispatch(loginHasErrored(true));
+            console.log(error);
+          });
+    };
+}

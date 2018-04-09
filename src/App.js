@@ -7,6 +7,7 @@ import Registration from './components/registration.container';
 import AdressForm from './components/adress.container';
 import AuthButton from './components/authButton';
 import PrivateRoute from './components/privateRoute';
+import ContactList from './components/contactList.component';
 import {connect} from 'react-redux';
 import {
   BrowserRouter as Router,
@@ -28,6 +29,8 @@ class App extends Component {
         <div className="container">
           <Route path="/" component={Login} />
           <PrivateRoute path="/registration" isAuthenticated={this.props.isAuthenticated} component={Registration} />
+          <PrivateRoute path="/contacts" isAuthenticated={this.props.isAuthenticated} component={ContactList} />
+
         </div>
       </Router>
 

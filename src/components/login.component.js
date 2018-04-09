@@ -49,7 +49,7 @@ class Login extends Component {
         
         
         if (this.props.isAuthenticated) {
-            return <Redirect to="registration" />;
+            return <Redirect to="contacts" />;
         }
       
         if (this.props.hasErrored) {
